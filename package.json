@@ -2,5 +2,9 @@
   "name": "webpack-practice",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.46.0"
+  }
 }
