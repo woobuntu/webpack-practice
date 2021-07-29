@@ -10,6 +10,15 @@ const config = {
     // __dirname : 현재 working directory이다.
     filename: "bundle.js",
   },
+  module: {
+    // rule == loader 이다.
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/, // 정규표현식 test를 통해 js파일에만 바벨을 적용
+      },
+    ],
+  },
 };
 
 module.exports = config;
