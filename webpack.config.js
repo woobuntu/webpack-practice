@@ -21,8 +21,24 @@ const config = {
       },
       {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+        // 오른쪽의 loader부터 왼쪽으로 순차적으로 적용된다.
         // 1. css-loader에 의해 처리된 text를
         test: /\.css$/,
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 40000,
+              // 40000byte가 넘어가는 이미지는 별도의 파일로,
+              // 그렇지 않는 이미지는 bundle.js에 포함
+            },
+          },
+          "image-webpack-loader",
+        ],
+        // 오른쪽의 loader부터 왼쪽으로 순차적으로 적용된다.
       },
     ],
   },
