@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // webpack5 이전 버전에서는 extract-text-webpack-plugin 사용
 
 const config = {
+  mode: "development",
   entry: "./src/index.js",
   // 브라우저에서 애플리케이션이 구동될 때 처음으로 실행될 파일
   output: {
@@ -16,8 +17,14 @@ const config = {
     // rule == loader 이다.
     rules: [
       {
-        use: "babel-loader",
-        test: /\.js$/, // 정규표현식 test를 통해 js파일에만 바벨을 적용
+        test: /\.m?js$/, // 정규표현식 test를 통해 js파일에만 바벨을 적용
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
       {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
