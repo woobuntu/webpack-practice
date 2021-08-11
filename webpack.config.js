@@ -19,6 +19,13 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+        // css파일에는 두 loader를 적용하는데
+        // use 배열에 나열된 것 중 오른쪽에 있는 것부터 적용이 된다.
+        // 즉, css-loader의 output이 style-loader의 input으로 들어간다.
+      },
     ],
   },
 };
