@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var path = require("path");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // 빈번하게 업데이트되지 않을 것으로 예상되는 dependency들
 const VENDOR_LIBS = [
@@ -46,4 +47,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new HtmlWebpackPlugin({ template: "src/index.html" })],
 };
