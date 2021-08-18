@@ -15,10 +15,11 @@ const VENDOR_LIBS = [
   "redux-thunk",
 ];
 
-const determineVendorRegex = new RegExp(VENDOR_LIBS.join("|"));
-
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    bundle: { import: "./src/index.js", dependOn: "vendor" },
+    vendor: VENDOR_LIBS,
+  },
   mode: "development",
   output: {
     path: path.join(__dirname, "dist"),
@@ -44,16 +45,5 @@ module.exports = {
         // 즉, css-loader의 output이 style-loader의 input으로 들어간다.
       },
     ],
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: determineVendorRegex,
-          name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
   },
 };
