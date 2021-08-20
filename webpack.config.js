@@ -20,11 +20,15 @@ module.exports = {
   entry: {
     bundle: { import: "./src/index.js", dependOn: "vendor" },
     vendor: VENDOR_LIBS,
+    // vendor파일이 실제로 바뀌었는가를 판단하는 manifest도 있는데
+    // webpack5에서의 설정 방법은 나중에...
   },
   mode: "development",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].bundle.js", // name은 entry의 key로 결정된다.
+    filename: "[name].[contenthash].js",
+    // name은 entry의 key로 결정된다.
+    // 파일 이름이 바뀌지 않으면 브라우저는 cache를 사용하기 때문에 hash값 사용
   },
   module: {
     rules: [
